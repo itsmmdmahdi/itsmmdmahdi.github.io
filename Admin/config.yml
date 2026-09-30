@@ -1,22 +1,18 @@
 backend:
   name: git-gateway
-  branch: main
-  site_domain: lovely-fairy-414485.netlify.app # آدرس اختصاصی نیتلیفای شما
+  branch: main # یا master (هر شاخه‌ای که روی گیتهاب داری)
 
-media_folder: "assets/images/articles"
-public_folder: "/assets/images/articles"
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
 
 collections:
-  - name: "articles"
+  - name: "posts"
     label: "مقالات"
-    folder: "content/articles"
+    folder: "posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "شناسه (عددی - برای مرتب‌سازی)", name: "id", widget: "number", value_type: "int" }
-      - { label: "عنوان مقاله", name: "title", widget: "string" }
-      - { label: "خلاصه مقاله", name: "summary", widget: "text" }
-      - { label: "تصویر شاخص", name: "image", widget: "image" }
-      - { label: "تاریخ انتشار (مثلاً ۱۴۰۵/۰۷/۱۰)", name: "date", widget: "string" }
-      - { label: "زمان مطالعه (مثلاً ۴ دقیقه)", name: "readTime", widget: "string" }
-      - { label: "متن کامل مقاله", name: "body", widget: "markdown" }
+      - {label: "عنوان", name: "title", widget: "string"}
+      - {label: "تاریخ انتشار", name: "date", widget: "datetime"}
+      - {label: "تصویر شاخص", name: "image", widget: "image", required: false}
+      - {label: "متن مقاله", name: "body", widget: "markdown"}

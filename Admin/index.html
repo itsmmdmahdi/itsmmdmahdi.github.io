@@ -1,11 +1,36 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>پنل مدیریت مقالات</title>
   <!-- اسکریپت احراز هویت Netlify -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  
+  <style>
+    /* استایل اصلاح ظاهر CMS در موبایل */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f4f5f7;
+    }
+    
+    /* مخفی کردن بخش پیش‌نمایش در موبایل برای باز شدن فضا */
+    @media (max-width: 768px) {
+      [class*="Pane2"] {
+        display: none !important;
+      }
+      [class*="Pane1"] {
+        width: 100% !important;
+      }
+      [class*="AppHeaderContent"] {
+        padding: 0 10px !important;
+      }
+      [class*="ControlContainer"] {
+        padding: 10px !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- بارگذاری Decap CMS -->

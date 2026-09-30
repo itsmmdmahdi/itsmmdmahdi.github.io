@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     
-    <!-- اسکریپت مدیریت ورود و تایید ایمیل Netlify -->
+    <!-- اسکریپت مدیریت ورود Netlify -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <style>
@@ -20,7 +20,6 @@
             user-select: none;
         }
 
-        /* پس‌زمینه یکدست و یکپارچه نئونی */
         body {
             background: radial-gradient(circle at center, #1e1035 0%, #0d0818 60%, #05030a 100%);
             background-attachment: fixed;
@@ -35,18 +34,23 @@
             padding: 20px;
         }
 
-        /* 1. هدر بالای صفحه */
-        .header-section {
+        .top-wrapper {
             width: 100%;
             max-width: 900px;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            margin-top: 5px;
+            gap: 20px;
             z-index: 1;
         }
 
-        /* ترکیب روز و تاریخ در سمت راست */
+        .header-section {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .date-day-container {
             display: flex;
             align-items: center;
@@ -71,7 +75,6 @@
             box-shadow: 0 0 12px rgba(244, 63, 94, 0.25);
         }
 
-        /* دکمه Log in سمت چپ */
         .admin-login-btn {
             display: flex;
             align-items: center;
@@ -87,7 +90,7 @@
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
             box-shadow: 0 0 10px rgba(168, 85, 247, 0.1);
-            dir: ltr;
+            direction: ltr;
         }
 
         .admin-login-btn i {
@@ -103,14 +106,12 @@
             transform: translateY(-2px);
         }
 
-        /* 2. بخش Welcome در وسط بالا */
         .welcome-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 2px;
-            margin-top: 15px;
-            z-index: 1;
+            margin-top: 10px;
         }
 
         .welcome-title {
@@ -135,7 +136,6 @@
             filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.6));
         }
 
-        /* 3. دکمه‌های اصلی */
         .main-content {
             display: flex;
             flex-direction: column;
@@ -143,7 +143,7 @@
             width: 100%;
             max-width: 380px;
             z-index: 1;
-            margin: 25px 0;
+            margin: 20px 0;
         }
 
         .nav-btn {
@@ -171,7 +171,6 @@
             box-shadow: 0 12px 30px rgba(168, 85, 247, 0.35);
         }
 
-        /* 4. فوتر */
         footer {
             display: flex;
             gap: 25px;
@@ -217,43 +216,40 @@
 </head>
 <body>
 
-    <!-- هدر بالای صفحه -->
-    <header class="header-section">
-        <!-- روز و تاریخ شمسی (سمت راست) -->
-        <div class="date-day-container" id="date-day-box">
-            <span id="current-day">---</span>
-            <span class="divider">|</span>
-            <span id="current-date">--/--/--</span>
+    <div class="top-wrapper">
+        <header class="header-section">
+            <div class="date-day-container" id="date-day-box">
+                <span id="current-day">---</span>
+                <span class="divider">|</span>
+                <span id="current-date">--/--/--</span>
+            </div>
+
+            <!-- لینک مستقیم اصلاح‌شده به پوشه admin -->
+            <a href="admin/index.html" class="admin-login-btn" title="ورود نویسندگان">
+                <i class="fa-solid fa-user-gear"></i>
+                <span>Log in</span>
+            </a>
+        </header>
+
+        <div class="welcome-wrapper">
+            <svg class="flourish-line" viewBox="0 0 200 15">
+                <path d="M 10,10 Q 50,2 100,10 Q 150,18 190,10" />
+            </svg>
+
+            <h1 class="welcome-title">Welcome</h1>
+
+            <svg class="flourish-line" viewBox="0 0 200 15">
+                <path d="M 10,10 Q 50,18 100,10 Q 150,2 190,10" />
+            </svg>
         </div>
-
-        <!-- دکمه ورود به پنل مدیریت (سمت چپ) -->
-        <a href="/admin/" class="admin-login-btn" title="ورود نویسندگان">
-            <i class="fa-solid fa-user-gear"></i>
-            <span>Log in</span>
-        </a>
-    </header>
-
-    <!-- بخش Welcome دقیقاً در مرکز و بالای دکمه‌ها -->
-    <div class="welcome-wrapper">
-        <svg class="flourish-line" viewBox="0 0 200 15">
-            <path d="M 10,10 Q 50,2 100,10 Q 150,18 190,10" />
-        </svg>
-
-        <h1 class="welcome-title">Welcome</h1>
-
-        <svg class="flourish-line" viewBox="0 0 200 15">
-            <path d="M 10,10 Q 50,18 100,10 Q 150,2 190,10" />
-        </svg>
     </div>
 
-    <!-- دکمه‌های اصلی -->
     <main class="main-content">
         <a href="music.html" class="nav-btn">موسیقی</a>
         <a href="articles.html" class="nav-btn">مقالات</a>
         <a href="fun.html" class="nav-btn">سرگرمی</a>
     </main>
 
-    <!-- فوتر -->
     <footer>
         <a href="https://t.me/itsmmdmahdi" target="_blank" class="social-link">
             <i class="fa-brands fa-telegram" style="color: #24A1DE;"></i>
@@ -265,7 +261,6 @@
         </a>
     </footer>
 
-    <!-- اسکریپت تاریخ و روز -->
     <script>
         function updatePersianDate() {
             const now = new Date();
@@ -283,7 +278,6 @@
             dateElement.textContent = persianDate;
             dayElement.textContent = persianDay;
 
-            // روزهای پنج‌شنبه (4) و جمعه (5)
             const dayOfWeek = now.getDay();
             if (dayOfWeek === 4 || dayOfWeek === 5) {
                 dateDayBox.classList.add('holiday');
@@ -293,13 +287,12 @@
         updatePersianDate();
     </script>
 
-    <!-- اسکریپت هدایت خودکار پس از تایید یا ورود به Identity -->
     <script>
         if (window.netlifyIdentity) {
             window.netlifyIdentity.on("init", user => {
                 if (!user) {
                     window.netlifyIdentity.on("login", () => {
-                        document.location.href = "/admin/";
+                        document.location.href = "admin/index.html";
                     });
                 }
             });

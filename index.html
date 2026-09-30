@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>صفحه اصلی</title>
-    <!-- آیکون‌ها و فونت دست‌نویس -->
+    <!-- آیکون‌ها و فونت دستی -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-
+    
     <style>
         * {
             box-sizing: border-box;
@@ -17,7 +17,7 @@
             user-select: none;
         }
 
-        /* پس‌زمینه یکدست و یکپارچه نئونی */
+        /* پس‌زمینه کاملاً یکدست و یکپارچه نئونی */
         body {
             background: radial-gradient(circle at center, #1e1035 0%, #0d0818 60%, #05030a 100%);
             background-attachment: fixed;
@@ -32,42 +32,26 @@
             padding: 20px;
         }
 
-        /* بخش بالایی کانتینر برای چسباندن هدر و ولکام به یکدیگر */
-        .top-wrapper {
-            width: 100%;
-            max-width: 900px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            z-index: 1;
-        }
-
         /* 1. هدر بالای صفحه */
         .header-section {
             width: 100%;
+            max-width: 900px;
             display: flex;
-            justify-content: flex-end; /* قرارگیری روز و تاریخ در سمت راست */
+            justify-content: space-between;
             align-items: center;
+            margin-top: 10px;
+            z-index: 1;
         }
 
-        /* ترکیب روز و تاریخ در سمت راست */
-        .date-day-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .date-box, .day-box {
+            font-size: 15px;
+            font-weight: 600;
             background: rgba(255, 255, 255, 0.05);
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             color: #cbd5e1;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .date-day-container .divider {
-            opacity: 0.3;
         }
 
         .holiday {
@@ -76,13 +60,12 @@
             box-shadow: 0 0 12px rgba(244, 63, 94, 0.25);
         }
 
-        /* 2. بخش Welcome کاملاً بالا و چسبیده به هدر */
+        /* بخش Welcome و خطوط ساده بالا/پایین */
         .welcome-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 2px;
-            margin-top: 5px;
         }
 
         .welcome-title {
@@ -97,6 +80,7 @@
             padding: 0 10px;
         }
 
+        /* خطوط منحنی تمیز بدون نقطه‌ها و آیکون */
         .flourish-line {
             width: 180px;
             height: 12px;
@@ -107,7 +91,7 @@
             filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.6));
         }
 
-        /* 3. دکمه‌های اصلی */
+        /* 2. دکمه‌های شفاف و استوانه‌ای */
         .main-content {
             display: flex;
             flex-direction: column;
@@ -115,7 +99,7 @@
             width: 100%;
             max-width: 380px;
             z-index: 1;
-            margin: 20px 0;
+            margin: 30px 0;
         }
 
         .nav-btn {
@@ -143,7 +127,7 @@
             box-shadow: 0 12px 30px rgba(168, 85, 247, 0.35);
         }
 
-        /* 4. فوتر */
+        /* 3. فوتر و شبکه‌های اجتماعی (تنظیم چپ به راست برای آیدی و آیکون) */
         footer {
             display: flex;
             gap: 25px;
@@ -156,6 +140,7 @@
             border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
+            dir: ltr; /* جهت چپ به راست برای آیدی */
         }
 
         .social-link {
@@ -178,6 +163,10 @@
         }
 
         @media (max-width: 600px) {
+            .header-section {
+                flex-direction: column-reverse;
+                gap: 15px;
+            }
             .welcome-title {
                 font-size: 44px;
             }
@@ -189,31 +178,29 @@
 </head>
 <body>
 
-    <!-- کانتینر بخش بالا (شامل هدر و Welcome) -->
-    <div class="top-wrapper">
-        <!-- هدر بالای صفحه -->
-        <header class="header-section">
-            <!-- روز و تاریخ شمسی (سمت راست) -->
-            <div class="date-day-container" id="date-day-box">
-                <span id="current-day">---</span>
-                <span class="divider">|</span>
-                <span id="current-date">--/--/--</span>
-            </div>
-        </header>
+    <!-- هدر بالای صفحه -->
+    <header class="header-section">
+        <!-- تاریخ شمسی (سمت چپ) -->
+        <div class="date-box" id="current-date">--/--/--</div>
 
-        <!-- بخش Welcome چسبیده به بالای صفحه -->
+        <!-- بخش Welcome با خط بالا و پایین ساده -->
         <div class="welcome-wrapper">
+            <!-- خط بالا -->
             <svg class="flourish-line" viewBox="0 0 200 15">
                 <path d="M 10,10 Q 50,2 100,10 Q 150,18 190,10" />
             </svg>
 
             <h1 class="welcome-title">Welcome</h1>
 
+            <!-- خط پایین -->
             <svg class="flourish-line" viewBox="0 0 200 15">
                 <path d="M 10,10 Q 50,18 100,10 Q 150,2 190,10" />
             </svg>
         </div>
-    </div>
+
+        <!-- روز هفته (سمت راست) -->
+        <div class="day-box" id="current-day">---</div>
+    </header>
 
     <!-- دکمه‌های اصلی -->
     <main class="main-content">
@@ -222,7 +209,7 @@
         <a href="fun.html" class="nav-btn">سرگرمی</a>
     </main>
 
-    <!-- فوتر -->
+    <!-- فوتر (آیکون سمت چپ آیدی و علامت @ در ابتدای آیدی) -->
     <footer>
         <a href="https://t.me/itsmmdmahdi" target="_blank" class="social-link">
             <i class="fa-brands fa-telegram" style="color: #24A1DE;"></i>
@@ -247,14 +234,15 @@
 
             const dateElement = document.getElementById('current-date');
             const dayElement = document.getElementById('current-day');
-            const dateDayBox = document.getElementById('date-day-box');
 
             dateElement.textContent = persianDate;
             dayElement.textContent = persianDay;
 
+            // روزهای پنج‌شنبه (4) و جمعه (5)
             const dayOfWeek = now.getDay();
             if (dayOfWeek === 4 || dayOfWeek === 5) {
-                dateDayBox.classList.add('holiday');
+                dateElement.classList.add('holiday');
+                dayElement.classList.add('holiday');
             }
         }
 

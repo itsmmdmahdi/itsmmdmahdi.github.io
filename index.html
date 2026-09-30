@@ -3,118 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحه اصلی | وب‌سایت مهدی</title>
+    <title>صفحه اصلی</title>
+    <!-- آیکون‌های اینستاگرام و تلگرام -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
         }
+
         body {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: #f8fafc;
+            background-color: #0d0b14;
+            color: #ffffff;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
             padding: 20px;
         }
-        .main-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 40px 30px;
-            max-width: 480px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+
+        /* 1. نورهای نئونی بالا و پایین */
+        .neon-glow-top {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 200px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: 0;
         }
-        .profile-img {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #3b82f6, #ec4899);
+
+        .neon-glow-bottom {
+            position: absolute;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 200px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.25) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* 2. هدر بالای صفحه (تاریخ، Welcome، روز) */
+        .header-section {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            z-index: 1;
+        }
+
+        .date-box, .day-box {
+            font-size: 16px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: #cbd5e1;
+        }
+
+        /* کلاس برای روزها و تاریخ‌های تعطیل */
+        .holiday {
+            color: #f43f5e !important;
+            border-color: rgba(244, 63, 94, 0.3) !important;
+            box-shadow: 0 0 10px rgba(244, 63, 94, 0.2);
+        }
+
+        .welcome-title {
+            font-size: 42px;
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: 2px;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .rose-icon {
+            font-size: 28px;
+            filter: grayscale(100%) brightness(1.5);
+            -webkit-text-fill-color: initial;
+        }
+
+        /* 3. دکمه‌های استوانه‌ای و شفاف */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 380px;
+            z-index: 1;
+            margin: 40px 0;
+        }
+
+        .nav-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 36px;
-            margin: 0 auto 15px;
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-        }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 8px;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 600;
             color: #ffffff;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 50px; /* شکل استوانه‌ای */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
-        p.subtitle {
-            color: #94a3b8;
-            font-size: 14px;
-            margin-bottom: 30px;
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(168, 85, 247, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(168, 85, 247, 0.3);
         }
-        .nav-buttons {
+
+        /* 4. فوتر و شبکه‌های اجتماعی */
+        footer {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            gap: 25px;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 10px 24px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .btn {
+
+        .social-link {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
+            gap: 8px;
+            color: #94a3b8;
             text-decoration: none;
-            border-radius: 16px;
-            font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            font-size: 14px;
+            transition: color 0.2s;
         }
-        .btn:hover {
-            background: #3b82f6;
-            border-color: #3b82f6;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+
+        .social-link:hover {
+            color: #a855f7;
         }
-        .btn-icon {
-            font-size: 20px;
+
+        .social-link i {
+            font-size: 18px;
         }
-        footer {
-            margin-top: 30px;
-            font-size: 12px;
-            color: #64748b;
+
+        /* پاسخگویی برای موبایل */
+        @media (max-width: 600px) {
+            .header-section {
+                flex-direction: column-reverse;
+                gap: 15px;
+            }
+            .welcome-title {
+                font-size: 32px;
+            }
+            .rose-icon {
+                font-size: 22px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="main-card">
-        <div class="profile-img">🌐</div>
-        <h1>به وب‌سایت من خوش آمدید</h1>
-        <p class="subtitle">یک فضای اختصاصی برای پخش موزیک، مقالات و ارتباط با من</p>
+    <!-- نورهای نئونی پس‌زمینه -->
+    <div class="neon-glow-top"></div>
+    <div class="neon-glow-bottom"></div>
 
-        <!-- دکمه‌های هدایت به فایل‌های جداگانه -->
-        <div class="nav-buttons">
-            <a href="music.html" class="btn">
-                <span>🎵 پخش آنلاین موزیک</span>
-                <span class="btn-icon">➔</span>
-            </a>
+    <!-- بخش بالای صفحه -->
+    <header class="header-section">
+        <!-- تاریخ شمسی (سمت چپ) -->
+        <div class="date-box" id="current-date">۱۴۰۵/۰۳/۲۱</div>
+
+        <!-- متن خوش‌آمدگویی همراه با گل رز -->
+        <h1 class="welcome-title">
+            <span class="rose-icon">🌹</span>
+            Welcome
+            <span class="rose-icon">🌹</span>
+        </h1>
+
+        <!-- روز هفته (سمت راست) -->
+        <div class="day-box" id="current-day">دوشنبه</div>
+    </header>
+
+    <!-- بخش دکمه‌های اصلی -->
+    <main class="main-content">
+        <!-- بعداً مسیر music.html یا هر فایل دیگری را قرار می‌دهیم -->
+        <a href="music.html" class="nav-btn">موسیقی</a>
+        <a href="articles.html" class="nav-btn">مقالات</a>
+        <a href="fun.html" class="nav-btn">سرگرمی</a>
+    </main>
+
+    <!-- بخش ارتباطی پایین صفحه -->
+    <footer>
+        <a href="https://t.me/itsmmdmahdi" target="_blank" class="social-link">
+            <i class="fa-brands fa-telegram" style="color: #24A1DE;"></i>
+            <span>@itsmmdmahdi</span>
+        </a>
+        <a href="https://instagram.com/itsmmdmahdi" target="_blank" class="social-link">
+            <i class="fa-brands fa-instagram" style="color: #E1306C;"></i>
+            <span>@itsmmdmahdi</span>
+        </a>
+    </footer>
+
+    <!-- اسکریپت محاسبه و به‌روزرسانی خودکار تاریخ و روز شمسی -->
+    <script>
+        function updatePersianDate() {
+            const now = new Date();
             
-            <a href="articles.html" class="btn">
-                <span>📝 وبلاگ و مقالات</span>
-                <span class="btn-icon">➔</span>
-            </a>
+            // تبدیل تاریخ میلادی به شمسی
+            const optionsDate = { year: 'numeric', month: '2-digit', day: '2-digit' };
+            const persianDate = new Intl.DateTimeFormat('fa-IR', optionsDate).format(now);
+            
+            // دریافت روز هفته
+            const optionsDay = { weekday: 'long' };
+            const persianDay = new Intl.DateTimeFormat('fa-IR', optionsDay).format(now);
 
-            <a href="about.html" class="btn">
-                <span>👤 درباره من و ارتباط</span>
-                <span class="btn-icon">➔</span>
-            </a>
-        </div>
+            const dateElement = document.getElementById('current-date');
+            const dayElement = document.getElementById('current-day');
 
-        <footer>طراحی و اجرا توسط مهدی • ۲۰۲۶</footer>
-    </div>
+            dateElement.textContent = persianDate;
+            dayElement.textContent = persianDay;
 
+            // مشخص کردن پنج‌شنبه (4) و جمعه (5) برای قرمز شدن
+            const dayOfWeek = now.getDay(); // 5 = Friday, 4 = Thursday
+            if (dayOfWeek === 4 || dayOfWeek === 5) {
+                dateElement.classList.add('holiday');
+                dayElement.classList.add('holiday');
+            }
+        }
+
+        // اجرای تابع موقع بارگذاری صفحه
+        updatePersianDate();
+    </script>
 </body>
 </html>

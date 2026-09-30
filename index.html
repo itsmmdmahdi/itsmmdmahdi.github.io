@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>صفحه اصلی</title>
-    <!-- آیکون‌ها و فونت دستی -->
+    <!-- آیکون‌ها و فونت دست‌نویس -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-    
-    <!-- اسکریپت مدیریت ورود Netlify -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <style>
         * {
@@ -20,6 +17,7 @@
             user-select: none;
         }
 
+        /* پس‌زمینه یکدست و یکپارچه نئونی */
         body {
             background: radial-gradient(circle at center, #1e1035 0%, #0d0818 60%, #05030a 100%);
             background-attachment: fixed;
@@ -34,23 +32,26 @@
             padding: 20px;
         }
 
+        /* بخش بالایی کانتینر برای چسباندن هدر و ولکام به یکدیگر */
         .top-wrapper {
             width: 100%;
             max-width: 900px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
             z-index: 1;
         }
 
+        /* 1. هدر بالای صفحه */
         .header-section {
             width: 100%;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end; /* قرارگیری روز و تاریخ در سمت راست */
             align-items: center;
         }
 
+        /* ترکیب روز و تاریخ در سمت راست */
         .date-day-container {
             display: flex;
             align-items: center;
@@ -75,43 +76,13 @@
             box-shadow: 0 0 12px rgba(244, 63, 94, 0.25);
         }
 
-        .admin-login-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #cbd5e1;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            padding: 8px 18px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(168, 85, 247, 0.1);
-            direction: ltr;
-        }
-
-        .admin-login-btn i {
-            color: #a855f7;
-            font-size: 14px;
-        }
-
-        .admin-login-btn:hover {
-            background: rgba(168, 85, 247, 0.2);
-            border-color: rgba(168, 85, 247, 0.6);
-            color: #ffffff;
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
-            transform: translateY(-2px);
-        }
-
+        /* 2. بخش Welcome کاملاً بالا و چسبیده به هدر */
         .welcome-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 2px;
-            margin-top: 10px;
+            margin-top: 5px;
         }
 
         .welcome-title {
@@ -136,6 +107,7 @@
             filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.6));
         }
 
+        /* 3. دکمه‌های اصلی */
         .main-content {
             display: flex;
             flex-direction: column;
@@ -171,6 +143,7 @@
             box-shadow: 0 12px 30px rgba(168, 85, 247, 0.35);
         }
 
+        /* 4. فوتر */
         footer {
             display: flex;
             gap: 25px;
@@ -216,21 +189,19 @@
 </head>
 <body>
 
+    <!-- کانتینر بخش بالا (شامل هدر و Welcome) -->
     <div class="top-wrapper">
+        <!-- هدر بالای صفحه -->
         <header class="header-section">
+            <!-- روز و تاریخ شمسی (سمت راست) -->
             <div class="date-day-container" id="date-day-box">
                 <span id="current-day">---</span>
                 <span class="divider">|</span>
                 <span id="current-date">--/--/--</span>
             </div>
-
-            <!-- لینک مستقیم اصلاح‌شده به پوشه admin -->
-            <a href="admin/index.html" class="admin-login-btn" title="ورود نویسندگان">
-                <i class="fa-solid fa-user-gear"></i>
-                <span>Log in</span>
-            </a>
         </header>
 
+        <!-- بخش Welcome چسبیده به بالای صفحه -->
         <div class="welcome-wrapper">
             <svg class="flourish-line" viewBox="0 0 200 15">
                 <path d="M 10,10 Q 50,2 100,10 Q 150,18 190,10" />
@@ -244,12 +215,14 @@
         </div>
     </div>
 
+    <!-- دکمه‌های اصلی -->
     <main class="main-content">
         <a href="music.html" class="nav-btn">موسیقی</a>
         <a href="articles.html" class="nav-btn">مقالات</a>
         <a href="fun.html" class="nav-btn">سرگرمی</a>
     </main>
 
+    <!-- فوتر -->
     <footer>
         <a href="https://t.me/itsmmdmahdi" target="_blank" class="social-link">
             <i class="fa-brands fa-telegram" style="color: #24A1DE;"></i>
@@ -261,6 +234,7 @@
         </a>
     </footer>
 
+    <!-- اسکریپت تاریخ و روز -->
     <script>
         function updatePersianDate() {
             const now = new Date();
@@ -285,18 +259,6 @@
         }
 
         updatePersianDate();
-    </script>
-
-    <script>
-        if (window.netlifyIdentity) {
-            window.netlifyIdentity.on("init", user => {
-                if (!user) {
-                    window.netlifyIdentity.on("login", () => {
-                        document.location.href = "admin/index.html";
-                    });
-                }
-            });
-        }
     </script>
 </body>
 </html>

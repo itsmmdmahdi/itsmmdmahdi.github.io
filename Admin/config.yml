@@ -1,0 +1,23 @@
+backend:
+  name: git-gateway
+  branch: main # اسم برنچ اصلی سایتت روی گیتهاب
+
+# مسیر ذخیره عکس‌های مقالات
+media_folder: "assets/images/articles"
+public_folder: "/assets/images/articles"
+
+# تنظیمات فرم ثبت مقاله
+collections:
+  - name: "articles"
+    label: "مقالات"
+    folder: "content/articles" # مقالات متنی اینجا ذخیره می‌شن
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "شناسه (عددی - برای مرتب‌سازی)", name: "id", widget: "number", value_type: "int" }
+      - { label: "عنوان مقاله", name: "title", widget: "string" }
+      - { label: "خلاصه مقاله", name: "summary", widget: "text" }
+      - { label: "تصویر شاخص", name: "image", widget: "image" }
+      - { label: "تاریخ انتشار (مثلاً ۱۴۰۵/۰۷/۱۰)", name: "date", widget: "string" }
+      - { label: "زمان مطالعه (مثلاً ۴ دقیقه)", name: "readTime", widget: "string" }
+      - { label: "متن کامل مقاله", name: "body", widget: "markdown" }

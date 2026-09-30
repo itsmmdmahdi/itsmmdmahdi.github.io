@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحه مقاله</title>
+    <!-- آیکون‌ها -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #1e1035 0%, #0d0818 60%, #05030a 100%);
+            background-attachment: fixed;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* هدر و دکمه بازگشت */
+        .header-bar {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: rgba(168, 85, 247, 0.4);
+            color: #fff;
+        }
+
+        /* کانتینر اصلی مقاله */
+        .article-wrapper {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        /* تیتر مقاله */
+        .article-main-title {
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 1.6;
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+        }
+
+        /* متادیتا (نویسنده، تاریخ، زمان مطالعه) */
+        .article-meta-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 13px;
+            color: #94a3b8;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .article-meta-info i {
+            color: #a855f7;
+            margin-left: 5px;
+        }
+
+        /* عکس اصلی مقاله */
+        .main-article-img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* متن اصلی مقاله */
+        .article-body-text {
+            font-size: 16px;
+            line-height: 2.2;
+            color: #e2e8f0;
+            text-align: justify;
+        }
+
+        .article-body-text p {
+            margin-bottom: 20px;
+        }
+
+        .article-body-text h2 {
+            font-size: 20px;
+            color: #a855f7;
+            margin: 30px 0 15px 0;
+        }
+
+        @media (max-width: 600px) {
+            .article-wrapper {
+                padding: 20px;
+            }
+            .article-main-title {
+                font-size: 20px;
+            }
+            .article-body-text {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- هدر بالای صفحه -->
+    <div class="header-bar">
+        <span style="font-size: 14px; color: #a855f7;">بخش مقالات</span>
+        
+        <!-- دکمه برگشت به لیست مقالات -->
+        <a href="articles.html" class="back-btn">
+            <span>لیست مقالات</span>
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+    </div>
+
+    <!-- بدنه مقاله -->
+    <article class="article-wrapper">
+        <!-- تیتر اصلی -->
+        <h1 class="article-main-title">هوش مصنوعی و آینده برنامه نویسی وب</h1>
+
+        <!-- جزئیات و تاریخ -->
+        <div class="article-meta-info">
+            <span><i class="fa-regular fa-user"></i> نویسنده: مهدی</span>
+            <span><i class="fa-regular fa-calendar"></i> ۱۴۰۵/۰۷/۰۱</span>
+            <span><i class="fa-regular fa-clock"></i> زمان مطالعه: ۵ دقیقه</span>
+        </div>
+
+        <!-- عکس شاخص مقاله -->
+        <img src="https://picsum.photos/800/400?random=2" alt="تصویر مقاله" class="main-article-img">
+
+        <!-- متن مقاله -->
+        <div class="article-body-text">
+            <p>
+                هوش مصنوعی طی سال‌های اخیر با سرعت خیره‌کننده‌ای رشد کرده و تمام حوزه‌های تکنولوژی را تحت تاثیر قرار داده است. یکی از بخش‌هایی که بیشترین تغییر را تجربه کرده، طراحی و توسعه وب است.
+            </p>
+
+            <h2>نقش هوش مصنوعی در کدنویسی چیست؟</h2>
+            <p>
+                امروزه ابزارهای مبتنی بر هوش مصنوعی می‌توانند به توسعه‌دهندگان در نوشتن کدهای تمیزتر، عیب‌یابی سریع‌تر و طراحی کادرهای مدرن‌تر کمک کنند. این ابزارها جایگزین برنامه نویسان نمی‌شوند، بلکه سرعت تولید پروژه را چندین برابر می‌کنند.
+            </p>
+
+            <p>
+                در آینده نزدیک، تمرکز اصلی طراحان وب بیشتر بر روی خلاقیت، تجربه کاربری (UX) و ایده‌پردازی خواهد بود تا کدنویسی‌های پیچیده و تکراری.
+            </p>
+        </div>
+    </article>
+
+</body>
+</html>

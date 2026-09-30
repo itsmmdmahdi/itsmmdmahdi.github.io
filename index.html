@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     
+    <!-- اسکریپت مدیریت ورود و تایید ایمیل Netlify -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
     <style>
         * {
             box-sizing: border-box;
@@ -41,6 +44,7 @@
             align-items: center;
             margin-top: 10px;
             z-index: 1;
+            gap: 10px;
         }
 
         .date-box, .day-box {
@@ -52,6 +56,39 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             color: #cbd5e1;
+            white-space: nowrap;
+        }
+
+        /* دکمه جدید ورود به پنل مدیریت در هدر */
+        .admin-login-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.1);
+            white-space: nowrap;
+        }
+
+        .admin-login-btn i {
+            color: #a855f7;
+            font-size: 15px;
+        }
+
+        .admin-login-btn:hover {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: rgba(168, 85, 247, 0.6);
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+            transform: translateY(-2px);
         }
 
         .holiday {
@@ -127,7 +164,7 @@
             box-shadow: 0 12px 30px rgba(168, 85, 247, 0.35);
         }
 
-        /* 3. فوتر و شبکه‌های اجتماعی (تنظیم چپ به راست برای آیدی و آیکون) */
+        /* 3. فوتر و شبکه‌های اجتماعی */
         footer {
             display: flex;
             gap: 25px;
@@ -140,7 +177,6 @@
             border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
-            dir: ltr; /* جهت چپ به راست برای آیدی */
         }
 
         .social-link {
@@ -164,8 +200,9 @@
 
         @media (max-width: 600px) {
             .header-section {
-                flex-direction: column-reverse;
-                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
             }
             .welcome-title {
                 font-size: 44px;
@@ -175,34 +212,38 @@
             }
         }
     </style>
-    <!-- اسکریپت مدیریت ورود و تایید ایمیل Netlify -->
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 
     <!-- هدر بالای صفحه -->
     <header class="header-section">
-        <!-- تاریخ شمسی (سمت چپ) -->
+        <!-- تاریخ شمسی -->
         <div class="date-box" id="current-date">--/--/--</div>
 
-        <!-- بخش Welcome با خط بالا و پایین ساده -->
-        <div class="welcome-wrapper">
-            <!-- خط بالا -->
-            <svg class="flourish-line" viewBox="0 0 200 15">
-                <path d="M 10,10 Q 50,2 100,10 Q 150,18 190,10" />
-            </svg>
+        <!-- دکمه ورود به پنل مدیریت -->
+        <a href="/admin/" class="admin-login-btn" title="ورود نویسندگان">
+            <i class="fa-solid fa-user-gear"></i>
+            <span>ورود به پنل</span>
+        </a>
 
-            <h1 class="welcome-title">Welcome</h1>
-
-            <!-- خط پایین -->
-            <svg class="flourish-line" viewBox="0 0 200 15">
-                <path d="M 10,10 Q 50,18 100,10 Q 150,2 190,10" />
-            </svg>
-        </div>
-
-        <!-- روز هفته (سمت راست) -->
+        <!-- روز هفته -->
         <div class="day-box" id="current-day">---</div>
     </header>
+
+    <!-- بخش Welcome با خط بالا و پایین -->
+    <div class="welcome-wrapper" style="margin-top: 20px;">
+        <!-- خط بالا -->
+        <svg class="flourish-line" viewBox="0 0 200 15">
+            <path d="M 10,10 Q 50,2 100,10 Q 150,18 190,10" />
+        </svg>
+
+        <h1 class="welcome-title">Welcome</h1>
+
+        <!-- خط پایین -->
+        <svg class="flourish-line" viewBox="0 0 200 15">
+            <path d="M 10,10 Q 50,18 100,10 Q 150,2 190,10" />
+        </svg>
+    </div>
 
     <!-- دکمه‌های اصلی -->
     <main class="main-content">
@@ -211,7 +252,7 @@
         <a href="fun.html" class="nav-btn">سرگرمی</a>
     </main>
 
-    <!-- فوتر (آیکون سمت چپ آیدی و علامت @ در ابتدای آیدی) -->
+    <!-- فوتر -->
     <footer>
         <a href="https://t.me/itsmmdmahdi" target="_blank" class="social-link">
             <i class="fa-brands fa-telegram" style="color: #24A1DE;"></i>
@@ -250,16 +291,18 @@
 
         updatePersianDate();
     </script>
-   <script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
-        });
-      }
-    });
-  }
-</script> 
+
+    <!-- اسکریپت هدایت خودکار پس از تایید یا ورود به Identity -->
+    <script>
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                        document.location.href = "/admin/";
+                    });
+                }
+            });
+        }
+    </script>
 </body>
 </html>

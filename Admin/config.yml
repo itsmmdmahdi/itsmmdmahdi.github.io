@@ -1,16 +1,15 @@
 backend:
   name: git-gateway
-  branch: main # اسم برنچ اصلی سایتت روی گیتهاب
+  branch: main
+  site_domain: lovely-fairy-414485.netlify.app # آدرس اختصاصی نیتلیفای شما
 
-# مسیر ذخیره عکس‌های مقالات
 media_folder: "assets/images/articles"
 public_folder: "/assets/images/articles"
 
-# تنظیمات فرم ثبت مقاله
 collections:
   - name: "articles"
     label: "مقالات"
-    folder: "content/articles" # مقالات متنی اینجا ذخیره می‌شن
+    folder: "content/articles"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:

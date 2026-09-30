@@ -51,18 +51,39 @@
             z-index: 10;
             flex-shrink: 0;
         }
-        .logo {
-            width: 42px;
-            height: 42px;
-            background: linear-gradient(135deg, #e11d48, #be123c);
-            border-radius: 50%;
+
+        /* Custom M + Music Logo */
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            position: relative;
+            box-shadow: 0 0 18px rgba(139, 92, 246, 0.5);
             margin-bottom: 10px;
-            box-shadow: 0 0 15px rgba(225, 29, 72, 0.4);
+            cursor: pointer;
         }
+        .brand-logo .logo-text {
+            font-weight: 900;
+            font-size: 20px;
+            color: #fff;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
+        }
+        .brand-logo .logo-icon {
+            position: absolute;
+            bottom: 4px;
+            right: 5px;
+            font-size: 11px;
+            color: #f43f5e;
+            transform: rotate(-15deg);
+            text-shadow: 0 0 5px rgba(0,0,0,0.8);
+        }
+
         .nav-icon {
             color: #64748b;
             font-size: 18px;
@@ -77,6 +98,7 @@
             text-decoration: none;
             background: transparent;
             border: none;
+            outline: none;
         }
         .nav-icon:hover, .nav-icon.active {
             color: #fff;
@@ -151,7 +173,7 @@
             flex: 1;
             padding: 25px;
             overflow-y: auto;
-            display: none; /* Managed by JS */
+            display: none;
             flex-direction: column;
             gap: 20px;
             padding-bottom: 100px;
@@ -303,7 +325,7 @@
         }
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 10px;
+            width: 100px;
             height: 10px;
             border-radius: 50%;
             background: #6366f1;
@@ -322,7 +344,11 @@
     <div class="app-container">
         <!-- Sidebar Navigation -->
         <div class="sidebar">
-            <div class="logo"><i class="fa-solid fa-compact-disc"></i></div>
+            <!-- Custom M + Music Logo -->
+            <div class="brand-logo" title="M Music">
+                <span class="logo-text">M</span>
+                <i class="fa-solid fa-music logo-icon"></i>
+            </div>
             
             <button class="nav-icon active" id="btn-nav-player" onclick="switchView('player')" title="Now Playing">
                 <i class="fa-solid fa-music"></i>
@@ -383,7 +409,7 @@
                     <div class="cat-pill" onclick="filterCategory('remix', this)">Remix</div>
                     <div class="cat-pill" onclick="filterCategory('rap', this)">Rap</div>
                     <div class="cat-pill" onclick="filterCategory('liked', this)">Most Liked 👍</div>
-                    <div class="cat-pill" onclick="filterCategory('my_playlist', this)">My Playlist ❤️️</div>
+                    <div class="cat-pill" onclick="filterCategory('my_playlist', this)">My Playlist ❤</div>
                 </div>
 
                 <!-- Track List -->
@@ -425,11 +451,15 @@
     <audio id="audio-element"></audio>
 
     <script>
-        // Tracks Database
+        // Folder Paths inside GitHub repository for categories:
+        // music/sad/
+        // music/happy/
+        // music/rap/
+        // music/remix/
         const masterSongs = [
-            { id: 1, title: "Energy Remix", artist: "DJ Shadow", category: ["happy", "remix"], url: "https://files.catbox.moe/a1b2c3.mp3", cover: "🔥", likes: 12 },
-            { id: 2, title: "Sad Rain Beats", artist: "LoFi Chill", category: ["sad"], url: "https://files.catbox.moe/x9y8z7.mp3", cover: "🌧", likes: 8 },
-            { id: 3, title: "Rap Legend", artist: "MC Fast", category: ["rap", "happy"], url: "https://files.catbox.moe/m4n5o6.mp3", cover: "🎤", likes: 25 }
+            { id: 1, title: "Energy Remix", artist: "DJ Shadow", category: ["happy", "remix"], url: "music/remix/energy.mp3", cover: "🔥", likes: 12 },
+            { id: 2, title: "Sad Rain Beats", artist: "LoFi Chill", category: ["sad"], url: "music/sad/rain.mp3", cover: "🌧", likes: 8 },
+            { id: 3, title: "Rap Legend", artist: "MC Fast", category: ["rap", "happy"], url: "music/rap/legend.mp3", cover: "🎤", likes: 25 }
         ];
 
         let userLikes = JSON.parse(localStorage.getItem('user_likes') || '[]');
@@ -467,7 +497,7 @@
         function renderTrackList(songs) {
             const container = document.getElementById('track-list-container');
             container.innerHTML = '';
-            if (songs.length === 0) {
+            if (!songs || songs.length === 0) {
                 container.innerHTML = '<p style="color:#64748b; padding:15px; font-size:13px;">No tracks found.</p>';
                 return;
             }
@@ -495,23 +525,4 @@
                             </button>
 
                             <button class="btn-icon-action ${inPlaylist ? 'liked' : ''}" onclick="togglePlaylist(${song.id})" title="Add to My Playlist">
-                                <i class="fa-solid ${inPlaylist ? 'fa-check' : 'fa-plus'}"></i>
-                            </button>
-
-                            <a href="${song.url}" download class="btn-icon-action" title="Download MP3" target="_blank"><i class="fa-solid fa-download"></i></a>
-                        </div>
-                    </div>
-                `;
-                container.insertAdjacentHTML('beforeend', itemHtml);
-            });
-        }
-
-        // Category Filter Function
-        function filterCategory(cat, element) {
-            const pills = document.querySelectorAll('.cat-pill');
-            pills.forEach(p => p.classList.remove('active'));
-            if(element) element.classList.add('active');
-
-            document.getElementById('section-heading').textContent = element ? element.textContent : 'Tracks';
-
-            
+                                <i class="fa-solid

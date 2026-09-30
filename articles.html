@@ -12,7 +12,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             user-select: none;
         }
 
@@ -46,6 +46,7 @@
             text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
         }
 
+        /* اصلاح دکمه برگشت: فلش سمت چپ قرار گرفت */
         .back-btn {
             display: flex;
             align-items: center;
@@ -76,7 +77,7 @@
             gap: 20px;
         }
 
-        /* کارت مستطیلی هر مقاله (سبک زومیت) */
+        /* کارت مستطیلی هر مقاله */
         .article-card {
             display: flex;
             background: rgba(255, 255, 255, 0.03);
@@ -99,10 +100,11 @@
 
         /* تصویر مقاله در سمت راست */
         .article-image {
-            width: 220px;
-            min-width: 220px;
-            height: 140px;
+            width: 200px;
+            min-width: 200px;
+            height: 130px;
             object-fit: cover;
+            background: #130a24;
         }
 
         /* محتوای متنی در سمت چپ */
@@ -157,7 +159,7 @@
             }
             .article-image {
                 width: 100%;
-                height: 180px;
+                height: 170px;
             }
             .article-title {
                 font-size: 16px;
@@ -170,44 +172,45 @@
     <!-- هدر بالای صفحه -->
     <div class="header-bar">
         <h1 class="page-title">آخرین مقالات</h1>
+        
+        <!-- دکمه بازگشت (فلش در سمت چپ متن) -->
         <a href="index.html" class="back-btn">
-            <i class="fa-solid fa-arrow-right"></i>
             <span>صفحه اصلی</span>
+            <i class="fa-solid fa-arrow-left"></i>
         </a>
     </div>
 
     <!-- لیست مقالات -->
     <div class="articles-container" id="articles-list">
-        <!-- مقالات توسط جاوااسکریپت در اینجا جای‌گذاری می‌شوند -->
+        <!-- مقالات با جاوااسکریپت جای‌گذاری می‌شوند -->
     </div>
 
     <script>
-        // ۱. لیست داده‌های مقالات (هر مقاله جدیدی بخوای اضافه کنی فقط اینجا یک لایه‌ی جدید اضافه می‌کنی)
+        // لیست مقالات نمونه
         const articles = [
             {
                 id: 2,
                 title: "رونمایی از هوش مصنوعی جدید با قابلیت‌های خیره‌کننده",
                 summary: "توضیحات و خلاصه کوتاهی درباره مقاله جدید و دستاوردهای اخیر در دنیای تکنولوژی...",
-                image: "https://via.placeholder.com/400x250/1e1035/ffffff?text=AI+Article",
+                image: "https://picsum.photos/400/250?random=1",
                 date: "1405/07/07",
                 readTime: "۴ دقیقه",
-                link: "article-2.html" // لینک به صفحه اختصاصی مقاله
+                link: "article-2.html"
             },
             {
                 id: 1,
                 title: "هوش مصنوعی و آینده برنامه نویسی وب",
                 summary: "بررسی تاثیر ابزارهای هوش مصنوعی بر آینده توسعه‌دهندگان وب و طراحی سایت...",
-                image: "https://via.placeholder.com/400x250/0d0818/ffffff?text=Web+Dev",
+                image: "https://picsum.photos/400/250?random=2",
                 date: "1405/07/01",
                 readTime: "۵ دقیقه",
                 link: "article-1.html"
             }
         ];
 
-        // ۲. مرتب‌سازی خودکار بر اساس ID (شناسه بالاتر = جدیدتر = بالای صفحه)
+        // مرتب‌سازی خودکار بر اساس ID (جدیدترین بالا)
         articles.sort((a, b) => b.id - a.id);
 
-        // ۳. رندر کردن کادرهای مقالات در صفحه
         const container = document.getElementById('articles-list');
         
         articles.forEach(article => {

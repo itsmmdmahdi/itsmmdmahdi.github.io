@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>صفحه اصلی</title>
-    <!-- آیکون‌های اینستاگرام و تلگرام -->
+    <!-- آیکون‌ها و فونت دستی شیک -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    
     <style>
         * {
             box-sizing: border-box;
@@ -16,7 +18,7 @@
         }
 
         body {
-            background-color: #0d0b14;
+            background-color: #0b0813;
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -28,15 +30,28 @@
             padding: 20px;
         }
 
-        /* 1. نورهای نئونی بالا و پایین */
+        /* 1. نورهای نئونی در بالا، مرکز و پایین */
         .neon-glow-top {
             position: absolute;
             top: -100px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80%;
-            height: 200px;
+            width: 90%;
+            height: 250px;
             background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .neon-glow-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 600px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.18) 0%, rgba(0,0,0,0) 70%);
             pointer-events: none;
             z-index: 0;
         }
@@ -46,63 +61,83 @@
             bottom: -100px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80%;
-            height: 200px;
+            width: 90%;
+            height: 250px;
             background: radial-gradient(circle, rgba(236, 72, 153, 0.25) 0%, rgba(0,0,0,0) 70%);
             pointer-events: none;
             z-index: 0;
         }
 
-        /* 2. هدر بالای صفحه (تاریخ، Welcome، روز) */
+        /* 2. هدر بالای صفحه */
         .header-section {
             width: 100%;
             max-width: 900px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 20px;
+            margin-top: 10px;
             z-index: 1;
         }
 
         .date-box, .day-box {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             background: rgba(255, 255, 255, 0.05);
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             color: #cbd5e1;
         }
 
-        /* کلاس برای روزها و تاریخ‌های تعطیل */
         .holiday {
             color: #f43f5e !important;
-            border-color: rgba(244, 63, 94, 0.3) !important;
-            box-shadow: 0 0 10px rgba(244, 63, 94, 0.2);
+            border-color: rgba(244, 63, 94, 0.4) !important;
+            box-shadow: 0 0 12px rgba(244, 63, 94, 0.25);
+        }
+
+        /* بخش تزئینی قاب و رز */
+        .welcome-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* گل رز خطی شیک */
+        .rose-art {
+            width: 42px;
+            height: 42px;
+            stroke: #e2e8f0;
+            fill: none;
+            stroke-width: 1.5;
+            filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.4));
+            margin-bottom: -6px;
         }
 
         .welcome-title {
-            font-size: 42px;
-            font-weight: 900;
-            font-style: italic;
+            font-family: 'Great Vibes', cursive, sans-serif;
+            font-size: 50px;
+            font-weight: 400;
             letter-spacing: 2px;
             text-align: center;
-            background: linear-gradient(135deg, #ffffff, #a855f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 25px rgba(168, 85, 247, 0.5);
+            line-height: 1.1;
         }
 
-        .rose-icon {
-            font-size: 28px;
-            filter: grayscale(100%) brightness(1.5);
-            -webkit-text-fill-color: initial;
+        /* خطوط اسکرول/قاب بالا و پایین متن */
+        .flourish-line {
+            width: 200px;
+            height: 18px;
+            fill: none;
+            stroke: #cbd5e1;
+            stroke-width: 1.5;
+            opacity: 0.85;
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
         }
 
-        /* 3. دکمه‌های استوانه‌ای و شفاف */
+        /* 3. دکمه‌های شفاف و استوانه‌ای */
         .main-content {
             display: flex;
             flex-direction: column;
@@ -110,7 +145,7 @@
             width: 100%;
             max-width: 380px;
             z-index: 1;
-            margin: 40px 0;
+            margin: 30px 0;
         }
 
         .nav-btn {
@@ -122,23 +157,23 @@
             font-weight: 600;
             color: #ffffff;
             text-decoration: none;
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 50px; /* شکل استوانه‌ای */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.12);
             border-color: rgba(168, 85, 247, 0.5);
             transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(168, 85, 247, 0.3);
+            box-shadow: 0 12px 30px rgba(168, 85, 247, 0.35);
         }
 
-        /* 4. فوتر و شبکه‌های اجتماعی */
+        /* 4. فوتر شبکه‌های اجتماعی */
         footer {
             display: flex;
             gap: 25px;
@@ -149,7 +184,8 @@
             background: rgba(255, 255, 255, 0.03);
             padding: 10px 24px;
             border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
         }
 
         .social-link {
@@ -170,52 +206,66 @@
             font-size: 18px;
         }
 
-        /* پاسخگویی برای موبایل */
         @media (max-width: 600px) {
             .header-section {
                 flex-direction: column-reverse;
                 gap: 15px;
             }
             .welcome-title {
-                font-size: 32px;
+                font-size: 42px;
             }
-            .rose-icon {
-                font-size: 22px;
+            .flourish-line {
+                width: 160px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- نورهای نئونی پس‌زمینه -->
+    <!-- هاله و نورهای نئونی -->
     <div class="neon-glow-top"></div>
+    <div class="neon-glow-center"></div>
     <div class="neon-glow-bottom"></div>
 
-    <!-- بخش بالای صفحه -->
+    <!-- هدر بالای صفحه -->
     <header class="header-section">
-        <!-- تاریخ شمسی (سمت چپ) -->
-        <div class="date-box" id="current-date">۱۴۰۵/۰۳/۲۱</div>
+        <!-- تاریخ شمسی -->
+        <div class="date-box" id="current-date">--/--/--</div>
 
-        <!-- متن خوش‌آمدگویی همراه با گل رز -->
-        <h1 class="welcome-title">
-            <span class="rose-icon">🌹</span>
-            Welcome
-            <span class="rose-icon">🌹</span>
-        </h1>
+        <!-- بخش Welcome با طرح قاب و رز خطی -->
+        <div class="welcome-wrapper">
+            <!-- SVG طرح رز خطی شبیه عکس تتو -->
+            <svg class="rose-art" viewBox="0 0 24 24">
+                <path d="M12 3c-1.5 0-2.5 1-2.5 2 0 1.2 1 2 2.5 2s2.5-.8 2.5-2c0-1-1-2-2.5-2zm0 4c-3 0-5 2-5 4.5 0 2 1.5 3.5 3.5 3.5 1.2 0 2.2-.5 2.8-1.2.6.7 1.6 1.2 2.8 1.2 2 0 3.5-1.5 3.5-3.5C17 9 15 7 12 7zm0 8c-1.5 3-1 6-1 6s2.5-1.5 3-3c.5 1.5 2.5 2 2.5 2s-.5-2.5-1.5-4c-1 0-2.2-.5-3-1z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
 
-        <!-- روز هفته (سمت راست) -->
-        <div class="day-box" id="current-day">دوشنبه</div>
+            <!-- خط اسکرول/قاب بالای متن -->
+            <svg class="flourish-line" viewBox="0 0 200 20">
+                <path d="M 10,10 Q 50,2 100,10 Q 150,18 190,10 M 80,10 Q 100,0 120,10" />
+                <circle cx="100" cy="4" r="2.5" fill="#ffffff" />
+            </svg>
+
+            <h1 class="welcome-title">Welcome</h1>
+
+            <!-- خط اسکرول/قاب پایین متن -->
+            <svg class="flourish-line" viewBox="0 0 200 20">
+                <path d="M 10,10 Q 50,18 100,10 Q 150,2 190,10 M 80,10 Q 100,20 120,10" />
+                <circle cx="100" cy="16" r="2.5" fill="#ffffff" />
+            </svg>
+        </div>
+
+        <!-- روز هفته -->
+        <div class="day-box" id="current-day">---</div>
     </header>
 
-    <!-- بخش دکمه‌های اصلی -->
+    <!-- دکمه‌های اصلی -->
     <main class="main-content">
-        <!-- بعداً مسیر music.html یا هر فایل دیگری را قرار می‌دهیم -->
         <a href="music.html" class="nav-btn">موسیقی</a>
         <a href="articles.html" class="nav-btn">مقالات</a>
         <a href="fun.html" class="nav-btn">سرگرمی</a>
     </main>
 
-    <!-- بخش ارتباطی پایین صفحه -->
+    <!-- فوتر -->
     <footer>
         <a href="https://t.me/itsmmdmahdi" target="_blank" class="social-link">
             <i class="fa-brands fa-telegram" style="color: #24A1DE;"></i>
@@ -227,16 +277,14 @@
         </a>
     </footer>
 
-    <!-- اسکریپت محاسبه و به‌روزرسانی خودکار تاریخ و روز شمسی -->
+    <!-- اسکریپت به‌روزرسانی تاریخ و روز -->
     <script>
         function updatePersianDate() {
             const now = new Date();
             
-            // تبدیل تاریخ میلادی به شمسی
             const optionsDate = { year: 'numeric', month: '2-digit', day: '2-digit' };
             const persianDate = new Intl.DateTimeFormat('fa-IR', optionsDate).format(now);
             
-            // دریافت روز هفته
             const optionsDay = { weekday: 'long' };
             const persianDay = new Intl.DateTimeFormat('fa-IR', optionsDay).format(now);
 
@@ -246,15 +294,14 @@
             dateElement.textContent = persianDate;
             dayElement.textContent = persianDay;
 
-            // مشخص کردن پنج‌شنبه (4) و جمعه (5) برای قرمز شدن
-            const dayOfWeek = now.getDay(); // 5 = Friday, 4 = Thursday
+            // مشخص کردن پنج‌شنبه (4) و جمعه (5)
+            const dayOfWeek = now.getDay();
             if (dayOfWeek === 4 || dayOfWeek === 5) {
                 dateElement.classList.add('holiday');
                 dayElement.classList.add('holiday');
             }
         }
 
-        // اجرای تابع موقع بارگذاری صفحه
         updatePersianDate();
     </script>
 </body>

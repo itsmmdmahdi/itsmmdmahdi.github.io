@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقالات</title>
+    <!-- آیکون‌ها -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #1e1035 0%, #0d0818 60%, #05030a 100%);
+            background-attachment: fixed;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* هدر و دکمه بازگشت */
+        .header-bar {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: rgba(168, 85, 247, 0.4);
+            color: #fff;
+        }
+
+        /* کانتینر مقالات */
+        .articles-container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* کارت مستطیلی هر مقاله (سبک زومیت) */
+        .article-card {
+            display: flex;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .article-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(168, 85, 247, 0.4);
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* تصویر مقاله در سمت راست */
+        .article-image {
+            width: 220px;
+            min-width: 220px;
+            height: 140px;
+            object-fit: cover;
+        }
+
+        /* محتوای متنی در سمت چپ */
+        .article-content {
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        .article-title {
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 1.5;
+            color: #f1f5f9;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .article-summary {
+            font-size: 13px;
+            color: #94a3b8;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .article-meta i {
+            margin-left: 4px;
+            color: #a855f7;
+        }
+
+        /* ریسپانسیو برای گوشی */
+        @media (max-width: 600px) {
+            .article-card {
+                flex-direction: column;
+            }
+            .article-image {
+                width: 100%;
+                height: 180px;
+            }
+            .article-title {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- هدر بالای صفحه -->
+    <div class="header-bar">
+        <h1 class="page-title">آخرین مقالات</h1>
+        <a href="index.html" class="back-btn">
+            <i class="fa-solid fa-arrow-right"></i>
+            <span>صفحه اصلی</span>
+        </a>
+    </div>
+
+    <!-- لیست مقالات -->
+    <div class="articles-container" id="articles-list">
+        <!-- مقالات توسط جاوااسکریپت در اینجا جای‌گذاری می‌شوند -->
+    </div>
+
+    <script>
+        // ۱. لیست داده‌های مقالات (هر مقاله جدیدی بخوای اضافه کنی فقط اینجا یک لایه‌ی جدید اضافه می‌کنی)
+        const articles = [
+            {
+                id: 2,
+                title: "رونمایی از هوش مصنوعی جدید با قابلیت‌های خیره‌کننده",
+                summary: "توضیحات و خلاصه کوتاهی درباره مقاله جدید و دستاوردهای اخیر در دنیای تکنولوژی...",
+                image: "https://via.placeholder.com/400x250/1e1035/ffffff?text=AI+Article",
+                date: "1405/07/07",
+                readTime: "۴ دقیقه",
+                link: "article-2.html" // لینک به صفحه اختصاصی مقاله
+            },
+            {
+                id: 1,
+                title: "هوش مصنوعی و آینده برنامه نویسی وب",
+                summary: "بررسی تاثیر ابزارهای هوش مصنوعی بر آینده توسعه‌دهندگان وب و طراحی سایت...",
+                image: "https://via.placeholder.com/400x250/0d0818/ffffff?text=Web+Dev",
+                date: "1405/07/01",
+                readTime: "۵ دقیقه",
+                link: "article-1.html"
+            }
+        ];
+
+        // ۲. مرتب‌سازی خودکار بر اساس ID (شناسه بالاتر = جدیدتر = بالای صفحه)
+        articles.sort((a, b) => b.id - a.id);
+
+        // ۳. رندر کردن کادرهای مقالات در صفحه
+        const container = document.getElementById('articles-list');
+        
+        articles.forEach(article => {
+            const cardHTML = `
+                <a href="${article.link}" class="article-card">
+                    <img src="${article.image}" alt="${article.title}" class="article-image">
+                    <div class="article-content">
+                        <div>
+                            <h2 class="article-title">${article.title}</h2>
+                            <p class="article-summary">${article.summary}</p>
+                        </div>
+                        <div class="article-meta">
+                            <span><i class="fa-regular fa-calendar"></i> ${article.date}</span>
+                            <span><i class="fa-regular fa-clock"></i> ${article.readTime}</span>
+                        </div>
+                    </div>
+                </a>
+            `;
+            container.innerHTML += cardHTML;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پخش آنلاین موزیک | مهدی</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
+        }
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .player-card {
+            background: rgba(30, 41, 59, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(16px);
+            border-radius: 28px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            position: relative;
+            overflow: hidden;
+        }
+        /* هدر فوقانی */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .icon-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .icon-btn:hover {
+            background: #3b82f6;
+            border-color: #3b82f6;
+        }
+        /* کاور موزیک */
+        .cover-art {
+            width: 220px;
+            height: 220px;
+            border-radius: 22px;
+            margin: 0 auto 20px;
+            background: linear-gradient(45deg, #ec4899, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+            box-shadow: 0 12px 35px rgba(236, 72, 153, 0.3);
+        }
+        .track-info {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .track-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+        .track-artist {
+            font-size: 14px;
+            color: #94a3b8;
+        }
+
+        /* کنترل‌های پخش شیشه‌ای */
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+        .btn-control {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-control:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.08);
+        }
+        .btn-skip {
+            width: 50px;
+            height: 50px;
+            font-size: 18px;
+        }
+        .btn-play {
+            width: 65px;
+            height: 65px;
+            font-size: 24px;
+            background: #3b82f6;
+            border-color: #3b82f6;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        }
+        .btn-play:hover {
+            background: #2563eb;
+        }
+
+        /* نوار زمان شیشه‌ای */
+        .progress-container {
+            width: 100%;
+        }
+        .time-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 6px;
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.15);
+            outline: none;
+            cursor: pointer;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #3b82f6;
+            box-shadow: 0 0 10px #3b82f6;
+        }
+
+        /* منوی کشویی دسته‌بندی‌ها */
+        .category-menu {
+            position: absolute;
+            top: 75px;
+            right: 30px;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 10px;
+            width: 160px;
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+        .category-menu.show {
+            display: flex;
+        }
+        .cat-item {
+            padding: 10px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #cbd5e1;
+            transition: 0.2s;
+            text-align: right;
+        }
+        .cat-item:hover, .cat-item.active {
+            background: #3b82f6;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="player-card">
+        <!-- هدر بالای کارت -->
+        <div class="header">
+            <a href="index.html" class="icon-btn" title="بازگشت به اصلی">➔</a>
+            <span style="font-size: 14px; color: #94a3b8;" id="current-category-name">همه آهنگ‌ها</span>
+            <button class="icon-btn" id="menu-btn" title="دسته‌بندی‌ها">☰</button>
+        </div>
+
+        <!-- منوی دسته‌بندی‌ها -->
+        <div class="category-menu" id="category-menu">
+            <div class="cat-item active" onclick="selectCategory('all', 'همه آهنگ‌ها')">همه</div>
+            <div class="cat-item" onclick="selectCategory('happy', 'آهنگ‌های شاد')">🥳 شاد</div>
+            <div class="cat-item" onclick="selectCategory('sad', 'آهنگ‌های غمگین')">🌧️ غمگین</div>
+            <div class="cat-item" onclick="selectCategory('remix', 'ریمیکس‌ها')">🔥 ریمیکس</div>
+        </div>
+
+        <!-- کاور و مشخصات -->
+        <div class="cover-art" id="cover">🎵</div>
+        <div class="track-info">
+            <div class="track-title" id="title">عنوان آهنگ</div>
+            <div class="track-artist" id="artist">خواننده</div>
+        </div>
+
+        <!-- دکمه‌های کنترل (راست: بعدی / مرکز: پخش / چپ: قبلی) -->
+        <div class="controls">
+            <button class="btn-control btn-skip" onclick="prevTrack()" title="قبلی">⏮</button>
+            <button class="btn-control btn-play" id="play-btn" onclick="togglePlay()" title="پخش/توقف">▶</button>
+            <button class="btn-control btn-skip" onclick="nextTrack()" title="بعدی">⏭</button>
+        </div>
+
+        <!-- نوار زمان پیشرفت صوتی -->
+        <div class="progress-container">
+            <input type="range" id="progress-bar" value="0" min="0" max="100" oninput="seekTrack(this.value)">
+            <div class="time-info">
+                <span id="current-time">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+        </div>
+
+        <!-- تگ پنهان صوت -->
+        <audio id="audio-element"></audio>
+    </div>
+
+    <script>
+        // 🎵 بانک اطلاعاتی آهنگ‌ها همراه با دسته‌بندی
+        const allSongs = [
+            {
+                title: "آهنگ نمونه شاد",
+                artist: "خواننده اول",
+                category: "happy",
+                url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                cover: "🥳"
+            },
+            {
+                title: "آهنگ نمونه غمگین",
+                artist: "خواننده دوم",
+                category: "sad",
+                url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+                cover: "🌧️"
+            },
+            {
+                title: "ریمیکس انرژی بالا",
+                artist: "دی‌جی نمونه",
+                category: "remix",
+                url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+                cover: "🔥"
+            }
+        ];
+
+        let currentPlaylist = [...allSongs];
+        let currentIndex = 0;
+        let isPlaying = false;
+
+        const audio = document.getElementById('audio-element');
+        const playBtn = document.getElementById('play-btn');
+        const title = document.getElementById('title');
+        const artist = document.getElementById('artist');
+        const cover = document.getElementById('cover');
+        const progressBar = document.getElementById('progress-bar');
+        const currentTimeEl = document.getElementById('current-time');
+        const durationEl = document.getElementById('duration');
+        const menuBtn = document.getElementById('menu-btn');
+        const categoryMenu = document.getElementById('category-menu');
+        const currentCategoryName = document.getElementById('current-category-name');
+
+        // باز و بستن منو سه خط
+        menuBtn.onclick = () => categoryMenu.classList.toggle('show');
+
+        // الگوریتم بر زدن لیست (Random Shuffle)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // انتخاب دسته‌بندی
+        function selectCategory(category, categoryLabel) {
+            categoryMenu.classList.remove('show');
+            currentCategoryName.textContent = categoryLabel;
+
+            // به‌روزرسانی هایلایت منو
+            document.querySelectorAll('.cat-item').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // فیلتر کردن
+            if (category === 'all') {
+                currentPlaylist = [...allSongs];
+            } else {
+                currentPlaylist = allSongs.filter(song => song.category === category);
+            }
+
+            // رندوم کردن لیست هر بار که انتخاب میشه
+            shuffleArray(currentPlaylist);
+            currentIndex = 0;
+
+            if (currentPlaylist.length > 0) {
+                loadTrack(currentIndex);
+                playTrack();
+            } else {
+                title.textContent = "آهنگی پیدا نشد";
+                artist.textContent = "-";
+                pauseTrack();
+            }
+        }
+
+        function loadTrack(index) {
+            const track = currentPlaylist[index];
+            title.textContent = track.title;
+            artist.textContent = track.artist;
+            cover.textContent = track.cover;
+            audio.src = track.url;
+        }
+
+        function playTrack() {
+            isPlaying = true;
+            audio.play();
+            playBtn.textContent = '⏸';
+        }
+
+        function pauseTrack() {
+            isPlaying = false;
+            audio.pause();
+            playBtn.textContent = '▶';
+        }
+
+        function togglePlay() {
+            if (isPlaying) pauseTrack();
+            else playTrack();
+        }
+
+        function nextTrack() {
+            currentIndex = (currentIndex + 1) % currentPlaylist.length;
+            loadTrack(currentIndex);
+            playTrack();
+        }
+
+        function prevTrack() {
+            currentIndex = (currentIndex - 1 + currentPlaylist.length) % currentPlaylist.length;
+            loadTrack(currentIndex);
+            playTrack();
+        }
+
+        // نوار پیشرفت و زمان
+        audio.ontimeupdate = () => {
+            if (audio.duration) {
+                const progressPercent = (audio.currentTime / audio.duration) * 100;
+                progressBar.value = progressPercent;
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+                durationEl.textContent = formatTime(audio.duration);
+            }
+        };
+
+        function seekTrack(value) {
+            if (audio.duration) {
+                audio.currentTime = (value * audio.duration) / 100;
+            }
+        }
+
+        function formatTime(seconds) {
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
+            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
+        // پخش اتوماتیک آهنگ بعدی وقتی تمام شد
+        audio.onended = () => nextTrack();
+
+        // بارگذاری اولیه با لیست رندوم
+        shuffleArray(currentPlaylist);
+        loadTrack(0);
+    </script>
+</body>
+</html>

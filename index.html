@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وب‌سایت شخصی مهدی</title>
+    <title>موزیک‌پلییر آنلاین مهدی</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,89 +12,153 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: #f8fafc;
+            background: #0f172a;
+            color: #fff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
-        .container {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
+        .player-card {
+            background: rgba(30, 41, 59, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
             border-radius: 24px;
-            padding: 40px;
-            max-width: 450px;
+            padding: 30px;
             width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
-        .avatar {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+        .cover-art {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            margin: 0 auto 20px;
+            background: linear-gradient(45deg, #ec4899, #8b5cf6);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
-            margin: 0 auto 20px;
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+            font-size: 60px;
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
+            object-fit: cover;
         }
-        h1 {
-            font-size: 26px;
-            margin-bottom: 8px;
-            color: #ffffff;
+        .track-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
         }
-        p.bio {
+        .track-artist {
+            font-size: 14px;
             color: #94a3b8;
-            font-size: 15px;
-            margin-bottom: 30px;
-            line-height: 1.6;
+            margin-bottom: 20px;
         }
-        .links {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        audio {
+            width: 100%;
+            margin-bottom: 25px;
+            border-radius: 10px;
         }
-        .link-btn {
-            display: block;
-            padding: 14px 20px;
-            background: #334155;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
+        .playlist {
+            text-align: right;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
         }
-        .link-btn:hover {
-            background: #3b82f6;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
-        }
-        footer {
-            margin-top: 30px;
-            font-size: 12px;
+        .playlist h3 {
+            font-size: 14px;
             color: #64748b;
+            margin-bottom: 10px;
+        }
+        .track-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .track-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .track-item.active {
+            border-right: 3px solid #ec4899;
+            background: rgba(236, 72, 153, 0.1);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="avatar">👨‍💻</div>
-        <h1>محمد مهدی</h1>
-        <p class="bio">به وب‌سایت شخصی من خوش آمدید! علاقه‌مند به تکنولوژی، یادگیری و ساخت پروژه‌های جدید.</p>
-        
-        <div class="links">
-            <a href="https://t.me/itsmmdmahdi" target="_blank" class="link-btn">💬 ارتباط در تلگرام</a>
-            <a href="https://github.com/itsmmdmahdi" target="_blank" class="link-btn">🐙 صفحه گیتهاب من</a>
-            <a href="mailto:example@gmail.com" class="link-btn">✉️ ارسال ایمیل</a>
-        </div>
 
-        <footer>ساخته شده با GitHub Pages</footer>
+    <div class="player-card">
+        <div class="cover-art" id="cover">🎵</div>
+        <div class="track-title" id="title">عنوان آهنگ</div>
+        <div class="track-artist" id="artist">نام خواننده</div>
+
+        <!-- پخش‌کننده صوتی اصلی -->
+        <audio id="audio-player" controls>
+            مرورگر شما از پخش آنلاین پشتیبانی نمی‌کند.
+        </audio>
+
+        <!-- لیست پخش -->
+        <div class="playlist">
+            <h3>لیست پخش</h3>
+            <div id="playlist-container"></div>
+        </div>
     </div>
+
+    <script>
+        // 🎵 لیست آهنگ‌ها (می‌توانی لینک‌های تلگرام یا هر لینک دیگری را اینجا بگذاری)
+        const playlist = [
+            {
+                title: "آهنگ نمونه ۱",
+                artist: "خواننده اول",
+                url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                cover: "🎧"
+            },
+            {
+                title: "آهنگ نمونه ۲",
+                artist: "خواننده دوم",
+                url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+                cover: "🎸"
+            }
+        ];
+
+        let currentTrack = 0;
+        const audio = document.getElementById('audio-player');
+        const title = document.getElementById('title');
+        const artist = document.getElementById('artist');
+        const cover = document.getElementById('cover');
+        const playlistContainer = document.getElementById('playlist-container');
+
+        function loadTrack(index) {
+            currentTrack = index;
+            const track = playlist[index];
+            title.textContent = track.title;
+            artist.textContent = track.artist;
+            cover.textContent = track.cover;
+            audio.src = track.url;
+            updatePlaylistUI();
+        }
+
+        function updatePlaylistUI() {
+            playlistContainer.innerHTML = '';
+            playlist.forEach((track, index) => {
+                const item = document.createElement('div');
+                item.className = `track-item ${index === currentTrack ? 'active' : ''}`;
+                item.innerHTML = `<span>${track.title} - ${track.artist}</span> <span>►</span>`;
+                item.onclick = () => {
+                    loadTrack(index);
+                    audio.play();
+                };
+                playlistContainer.appendChild(item);
+            });
+        }
+
+        // بارگذاری آهنگ اول موقع ورود
+        loadTrack(0);
+    </script>
 </body>
 </html>

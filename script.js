@@ -34,10 +34,11 @@ function submitComment() {
 }
 
 // پنل ادمین
+// پنل ادمین با مشخصات اختصاصی شما
 function adminLogin() {
     const u = document.getElementById('admin-user').value;
     const p = document.getElementById('admin-pass').value;
-    if(u === 'admin' && p === '1234') {
+    if(u === 'mmdmahdi' && p === '@MOHAMMADmahdi86') {
         document.getElementById('login-box').classList.add('hidden');
         document.getElementById('admin-panel').classList.remove('hidden');
     } else {

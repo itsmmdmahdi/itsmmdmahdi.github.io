@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahdi | پایگاه شخصی و مانیتورینگ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="home-theme">
+
+    <header class="site-header">
+        <div class="logo-area">
+            <span class="logo-badge">Mahdi</span>
+        </div>
+        <div class="header-center">
+            <div id="persian-date-capsule" class="date-capsule">شنبه - ۱۷ آبان ۱۴۰۵</div>
+        </div>
+        <div class="header-actions">
+            <button class="icon-btn menu-btn" onclick="toggleMenu()">☰</button>
+        </div>
+    </header>
+
+    <div id="dropdown-menu" class="dropdown-menu">
+        <a href="index.html">خانه</a>
+        <a href="article.html">مقالات</a>
+        <a href="admin.html">پنل مدیریت</a>
+    </div>
+
+    <main class="main-container">
+        <section class="card daily-fact-card">
+            <h2>💡 اطلاعات عمومی امروز</h2>
+            <p id="daily-fact-text">دانستنی امروز: هوش مصنوعی و اتوماسیون مرزهای جدیدی از سرعت را باز کرده‌اند.</p>
+        </section>
+
+        <section class="card market-card">
+            <div class="card-header">
+                <h2>📈 بازار و دارایی‌ها</h2>
+            </div>
+            <div id="crypto-list" class="crypto-list">
+                <div class="crypto-item"><span>بیت‌کوین (BTC):</span> <span class="up">۶۸,۴۵۰ $ (+۲.۴٪)</span></div>
+                <div class="crypto-item"><span>طلا:</span> <span class="up">ثابت (+۰.۸٪)</span></div>
+                <div class="crypto-item"><span>دلار:</span> <span class="down">پایدار (-۰.۲٪)</span></div>
+            </div>
+        </section>
+
+        <section class="card music-card">
+            <div class="card-header">
+                <h2>🎵 پلی‌لیست و موزیک</h2>
+                <a href="article.html" class="more-link">آرشیو ←</a>
+            </div>
+            <div id="music-list" class="music-list">
+                <p>موزیک‌های حال‌خوب‌کن برای کدنویسی...</p>
+            </div>
+        </section>
+
+        <section class="card articles-card">
+            <div class="card-header">
+                <h2>📝 آخرین مقالات</h2>
+                <a href="article.html" class="more-link">مشاهده همه ←</a>
+            </div>
+            <div id="featured-articles" class="articles-grid">
+                <p>به زودی مقالات جدید اضافه می‌شود...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="social-links">
+            <a href="https://t.me/itsmmdmahdi" target="_blank">Telegram: @itsmmdmahdi</a>
+            <a href="https://instagram.com/itsmmdmahdi" target="_blank">Instagram: @itsmmdmahdi</a>
+        </div>
+        <p class="copyright">طراحی شده با خلاقیت و هوش مصنوعی © ۲۰۲۶</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

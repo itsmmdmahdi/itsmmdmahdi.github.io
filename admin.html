@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل ادمین | Mahdi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-theme">
+
+    <header class="site-header">
+        <a href="index.html" class="logo-badge">Mahdi - Admin</a>
+        <a href="index.html" style="color:var(--text-color); text-decoration:none;">بازگشت به سایت ←</a>
+    </header>
+
+    <main class="main-container">
+        <div id="login-box" class="card">
+            <h2>ورود به پنل مدیریت</h2>
+            <div style="display:flex; flex-direction:column; gap:15px; margin-top:15px;">
+                <input type="text" id="admin-user" placeholder="نام کاربری (admin)" style="padding:10px; background:rgba(255,255,255,0.05); border:1px solid var(--border-color); color:#fff; border-radius:8px;" />
+                <input type="password" id="admin-pass" placeholder="رمز عبور (1234)" style="padding:10px; background:rgba(255,255,255,0.05); border:1px solid var(--border-color); color:#fff; border-radius:8px;" />
+                <button onclick="adminLogin()" style="padding:10px; background:var(--accent); color:#000; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">ورود</button>
+            </div>
+        </div>
+
+        <div id="admin-panel" class="card hidden">
+            <h2>✍️ مقاله‌ساز پیشرفته</h2>
+            <div style="display:flex; flex-direction:column; gap:15px; margin-top:15px;">
+                <input type="text" id="art-title" placeholder="تیتر مقاله..." style="padding:10px; background:rgba(255,255,255,0.05); border:1px solid var(--border-color); color:#fff; border-radius:8px;" />
+                <input type="text" id="art-tags" placeholder="تگ‌ها (تکنولوژی، هوش‌مصنوعی و...)" style="padding:10px; background:rgba(255,255,255,0.05); border:1px solid var(--border-color); color:#fff; border-radius:8px;" />
+                
+                <div id="blocks-builder" style="display:flex; flex-direction:column; gap:10px;"></div>
+
+                <div class="builder-actions" style="display:flex; gap:10px;">
+                    <button onclick="addTextBlock()" style="padding:8px 15px; background:rgba(255,255,255,0.1); color:#fff; border:none; border-radius:8px; cursor:pointer;">➕ افزودن متن</button>
+                    <button onclick="addImageBlock()" style="padding:8px 15px; background:rgba(255,255,255,0.1); color:#fff; border:none; border-radius:8px; cursor:pointer;">🖼️ افزودن عکس</button>
+                </div>
+
+                <button class="save-btn" onclick="saveArticle()" style="padding:12px; background:var(--accent); color:#000; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin-top:10px;">ذخیره و انتشار مقاله</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقالات | Mahdi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="articles-theme">
+
+    <div id="reading-progress-bar"></div>
+
+    <header class="site-header">
+        <a href="index.html" class="logo-badge">Mahdi</a>
+        <div class="header-actions">
+            <button class="icon-btn menu-btn" onclick="toggleMenu()">☰</button>
+        </div>
+    </header>
+
+    <div id="dropdown-menu" class="dropdown-menu">
+        <a href="index.html">خانه</a>
+        <a href="article.html">مقالات</a>
+        <a href="admin.html">پنل مدیریت</a>
+    </div>
+
+    <main class="main-container">
+        <div class="filter-bar" style="margin-bottom: 20px;">
+            <button class="filter-btn active">جدیدترین‌ها</button>
+            <button class="filter-btn">تکنولوژی</button>
+            <button class="filter-btn">برنامه‌نویسی</button>
+        </div>
+
+        <div id="articles-container" class="card">
+            <h2>خوش آمدید به بخش مقالات و ایده‌ها</h2>
+            <p>در اینجا می‌توانید مقالات تخصصی و دست‌نوشته‌ها را بخوانید.</p>
+        </div>
+
+        <section class="card comments-section">
+            <div class="article-actions" style="margin-bottom: 15px;">
+                <button onclick="likeArticle()" class="like-btn" style="background:none; border:1px solid var(--border-color); color:var(--text-color); padding:8px 15px; border-radius:8px; cursor:pointer;">❤️ <span id="like-count">14</span> لایک</button>
+            </div>
+            <h3>نظرات کاربران (<span id="comment-count">0</span>)</h3>
+            <div class="comment-form" style="display:flex; flex-direction:column; gap:10px; margin: 15px 0;">
+                <input type="text" id="commenter-name" placeholder="نام شما..." style="padding:10px; background:rgba(255,255,255,0.05); border:1px solid var(--border-color); color:#fff; border-radius:8px;" />
+                <input type="email" id="commenter-email" placeholder="ایمیل (فقط برای ادمین)..." style="padding:10px; background:rgba(255,255,255,0.05); border:1px solid var(--border-color); color:#fff; border-radius:8px;" />
+                <textarea id="comment-text" placeholder="نظر خود را بنویسید..." rows="3" style="padding:10px; background:rgba(255,255,255,0.05); border:1px solid var(--border-color); color:#fff; border-radius:8px;"></textarea>
+                <button onclick="submitComment()" style="padding:10px; background:var(--accent); color:#000; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">ارسال نظر</button>
+            </div>
+            <div id="comments-list"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
